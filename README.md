@@ -8,25 +8,35 @@ Technologies used-
 
 Activities that User can perform-
 
-1 User Registration.
-2 User Login.
-3 View Products.
-4 Add product to cart.
-5 View cart.
-6 Purchase the product.
+1) User Registration.
+
+2) User Login.
+
+3) View Products.
+
+4) Add product to cart.
+
+5) View cart.
+
+6) Purchase the product.
 
 Activities that Admin can perform-(for now by default there is one Admin, to login as admin just enter password-> "admin".
 
-1 Add new products in the products table.
-2 Check available quantity of any product.
-3 Check whether user is registered or not and fetch user details.
-4 Check user order history.
-5 Update quantity of any product.
-6 generate bill and display to user.
+1) Add new products in the products table.
+   
+2) Check available quantity of any product.
+
+3) Check whether user is registered or not and fetch user details.
+
+4) Check user order history.
+
+5) Update quantity of any product.
+
+6) generate bill and display to user.
 
 Activities that a Guest can perform-
 
-1 View available products.
+1) View available products.
 
 Tables used-
 
@@ -61,3 +71,5 @@ If you are using this application then you need to make changes to code as follo
 3) Add mysql-connector-java jar in build path, version I used -> 8.0.28.
 
 4) for admin login use password = "admin".
+
+5) To run application -> Package = com.eCart.test, Class = Test.java. 
