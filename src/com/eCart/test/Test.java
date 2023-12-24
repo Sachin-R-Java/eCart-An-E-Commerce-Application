@@ -40,30 +40,33 @@ public class Test {
 			case 1:
 				User u = new User();
 				u.userChoices();
-				isContinue();
+				//isContinue();
 				break;
 			case 2:
 				Admin a = new Admin();
 				a.AdminChoice();
 				a.AdminActions();
-				isContinue();
+				//isContinue();
 				break;
 			case 3:
 				Guest g = new Guest();
 				g.GuestChoice();
-				isContinue();
+				//isContinue();
 				break;
 			case 4:
-				System.out.println("Thank You");
-				break;
+				System.out.println("Thank You for using the application.");
+				//scan.reset();
 				//main(null);
+				break;
+				
 			default:
 				System.out.println("enter correct choice");
 				// HomePage();
 			}
 		} catch (Exception e) {
 			System.out.println("Please enter correct choice");
-			main(null);
+			HomePage();
+			//main(null);
 		}
 	}
 }

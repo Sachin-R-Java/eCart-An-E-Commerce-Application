@@ -2,6 +2,7 @@ package com.eCart.utility;
 
 import java.util.Scanner;
 
+import com.eCart.test.Test;
 import com.eCart.userfunctions.ViewProducts;
 
 public class Guest {
@@ -44,7 +45,8 @@ public class Guest {
 			GuestChoice();
 		} else if (choice.charAt(0) == 'n' || choice.charAt(0) == 'N') {
 			System.out.println("Thank You");
-		} else {
+		} 
+		else {
 			System.out.println("Please enter correct choice");
 			isContinueGuest();
 		}

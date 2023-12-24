@@ -1,11 +1,12 @@
 package com.eCart.utility;
 
-import java.util.Scanner;
+import java.util.Scanner; 
 
 import com.eCart.adminfunctions.CheckQuantity;
 import com.eCart.adminfunctions.CheckUserDetails;
 import com.eCart.adminfunctions.CheckUserHistory;
 import com.eCart.adminfunctions.UpdateProductQuantity;
+import com.eCart.test.Test;
 
 public class Admin {
 	public static boolean AdminLoginStatus = false;

@@ -2,6 +2,7 @@ package com.eCart.utility;
 
 import java.util.Scanner;
 
+import com.eCart.test.Test;
 import com.eCart.userfunctions.UserLogin;
 import com.eCart.userfunctions.ViewProducts;
 
@@ -19,13 +20,13 @@ public class User {
 			case 1:
 				Services s = new Services();
 				s.AddUser();
-				isContinueuserChoices();
+				//isContinueuserChoices();
 				break;
 			case 2:
 				User u = new User();
 				u.Login();
 				userLogin();
-				isContinueuserChoices();
+				//isContinueuserChoices();
 				break;
 			case 3:
 				Test t = new Test();
@@ -34,8 +35,8 @@ public class User {
 
 			default:
 				System.out.println("Enter correct choice");
-				//userChoices();
-				isContinueuserChoices();
+				userChoices();
+				//isContinueuserChoices();
 			}
 
 		} catch (Exception e) {
@@ -68,7 +69,6 @@ public class User {
 				case 1:
 					viewProduct();
 					isContinueuserLogin();
-					
 					break;
 				case 2:
 					addToCart();
@@ -86,7 +86,7 @@ public class User {
 					break;
 				case 5:
 					logOut();
-					userChoices();
+					//userChoices();
 					break;
 				default:
 					System.out.println("Enter Correct Choice");
