@@ -20,13 +20,13 @@ public class User {
 			case 1:
 				Services s = new Services();
 				s.AddUser();
-				//isContinueuserChoices();
+				isContinueuserChoices();
 				break;
 			case 2:
 				User u = new User();
 				u.Login();
 				userLogin();
-				//isContinueuserChoices();
+				// isContinueuserChoices();
 				break;
 			case 3:
 				Test t = new Test();
@@ -36,7 +36,7 @@ public class User {
 			default:
 				System.out.println("Enter correct choice");
 				userChoices();
-				//isContinueuserChoices();
+				// isContinueuserChoices();
 			}
 
 		} catch (Exception e) {
@@ -78,7 +78,7 @@ public class User {
 				case 3:
 					viewCart();
 					isContinueuserLogin();
-					
+
 					break;
 				case 4:
 					purchaseItem();
@@ -86,7 +86,7 @@ public class User {
 					break;
 				case 5:
 					logOut();
-					//userChoices();
+					// userChoices();
 					break;
 				default:
 					System.out.println("Enter Correct Choice");
@@ -171,6 +171,7 @@ public class User {
 			isContinueuserChoices();
 		}
 	}
+
 	public static void isContinueuserLogin() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Do you want to continue enter 'y/Y' for yes and 'n/N for No");

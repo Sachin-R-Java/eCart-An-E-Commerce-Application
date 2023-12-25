@@ -44,6 +44,7 @@ public class Services {
 	// Insert new product into database
 	public static void AddProducts() {
 		String query = "insert into products values(?,?,?,?,?)";
+		String query1 = "Select productId from products";
 		try {
 			Scanner scan = new Scanner(System.in);
 			Products product = new Products();
@@ -65,15 +66,20 @@ public class Services {
 			statement.setString(3, product.getDescription());
 			statement.setFloat(4, product.getPrice());
 			statement.setInt(5, product.getQuantity());
-			int i = statement.executeUpdate();
-			if (i == 1) {
-				System.out.println("Product added successfully");
-			} else
-				System.out.println("Failed to add product, Product Id already present");
-
+			PreparedStatement s = con.DBConnection().prepareStatement(query1);
+			ResultSet r = s.executeQuery();
+			while (r.next()) {
+				int pId = r.getInt(1);
+				if (pId != product.getProductId()) {
+					statement.executeUpdate();
+					System.out.println("Product added successfully");
+				} else
+					System.out.println("Failed to add product, Product Id already present");
+			}
 		} catch (SQLException e) {
+			// System.out.println("Failed to add product, Product Id already present");
 			e.getMessage();
-			e.printStackTrace();
+			// e.printStackTrace();
 		} finally {
 			try {
 				con.DBConnection().close();
@@ -239,17 +245,17 @@ public class Services {
 					rs = statement.executeQuery();
 					PreparedStatement s = con.DBConnection().prepareStatement(query2);
 					s.setInt(1, id);
-					s.setString(2,username);
+					s.setString(2, username);
 					r = s.executeQuery();
-					//ResultSet r = s.executeQuery();
-					int qty=0;
-					while(r.next()) {
+					// ResultSet r = s.executeQuery();
+					int qty = 0;
+					while (r.next()) {
 						int cartQty = r.getInt(1);
-						qty = cartQty+quantity;
+						qty = cartQty + quantity;
 					}
-					
-					if (rs.next()) {
-						if (quantity <= rs.getInt(4) && qty<=rs.getInt(4)) {
+
+					while (rs.next()) {
+						if (quantity <= rs.getInt(4) && qty <= rs.getInt(4)) {
 
 							statement1 = con.DBConnection().prepareStatement(query1);
 							statement1.setString(1, username);
@@ -265,8 +271,9 @@ public class Services {
 							} else
 								System.out.println("Failed to add product in cart");
 						} else {
-							System.out.println("Only " + rs.getInt(4) + " quantites available and you are asking "+qty);
-						System.out.println("Please check your cart, you might added this product in cart");
+							System.out
+									.println("Only " + rs.getInt(4) + " quantites available and you are asking " + qty);
+							System.out.println("Please check your cart, you might added this product in cart");
 						}
 					}
 				} catch (Exception e) {
@@ -320,10 +327,9 @@ public class Services {
 			String query1 = "insert into orderHistory values(?,?,?,?,?)";
 			String query2 = "delete from cart where userId=?";
 			String query3 = "select price,quantity from cart where userId=?";
-			String query4 = "select *from cart";
+			String query4 = "select *from cart where userId=?";
 			String query5 = "select productId, quantity from products";
 			String query6 = "update products set quantity=? where productId=?";
-
 			try {
 				statement = con.DBConnection().prepareStatement(query3);
 				statement.setString(1, username);
@@ -334,9 +340,26 @@ public class Services {
 					float unitPrice = rs.getFloat(1);
 					int quantity = rs.getInt(2);
 					sum = sum + (unitPrice * quantity);
-					i++;
-				}
-				if (i > 0) {
+					PreparedStatement statement4 = con.DBConnection().prepareStatement(query4);
+					statement4.setString(1, username);
+					ResultSet rs3 = statement4.executeQuery();
+					PreparedStatement statement5 = con.DBConnection().prepareStatement(query5);
+					ResultSet rs4 = statement5.executeQuery();
+					int id;
+					int qty;
+					while (rs3.next()) {
+						id = rs3.getInt(2);
+						qty = rs3.getInt(5);
+						while (rs4.next()) {
+							int pId = rs4.getInt(1);
+							int pQty = rs4.getInt(2);
+							int newQty = pQty - qty;
+							PreparedStatement statement6 = con.DBConnection().prepareStatement(query6);
+							statement6.setInt(1, newQty);
+							statement6.setInt(2, pId);
+							statement6.executeUpdate();
+						}
+					}
 					statement1 = con.DBConnection().prepareStatement(query);
 					statement1.setString(1, username);
 					rs2 = statement1.executeQuery();
@@ -348,41 +371,17 @@ public class Services {
 						statement2.setString(3, rs2.getString(3));
 						statement2.setFloat(4, rs2.getFloat(4));
 						statement2.setFloat(5, rs2.getFloat(5));
-						j = statement2.executeUpdate();
-						j++;
+						statement2.executeUpdate();
+
 					}
-					int k = 0;
-					if (j > 0) {
-						PreparedStatement statement4 = con.DBConnection().prepareStatement(query4);
-						ResultSet rs3 = statement4.executeQuery();
-						PreparedStatement statement5 = con.DBConnection().prepareStatement(query5);
-						ResultSet rs4 = statement5.executeQuery();
-						int id;
-						int qty;
-						while (rs3.next()) {
-							id = rs3.getInt(2);
-							qty = rs3.getInt(5);
-							while (rs4.next()) {
-								int pId = rs4.getInt(1);
-								int pQty = rs4.getInt(2);
-								if (id == pId) {
-									int newQty = pQty - qty;
-									PreparedStatement statement6 = con.DBConnection().prepareStatement(query6);
-									statement6.setInt(1, newQty);
-									statement6.setInt(2, pId);
-									statement6.executeUpdate();
-								}
-							}
-						}
-						statement3 = con.DBConnection().prepareStatement(query2);
-						statement3.setString(1, username);
-						k = statement3.executeUpdate();
-					}
-					if (k > 0) {
-						System.out.println("Order Placed Successfully");
-						System.out.println("Total bill amount-> " + sum);
-					}
+					statement3 = con.DBConnection().prepareStatement(query2);
+					statement3.setString(1, username);
+					statement3.executeUpdate();
+
 				}
+				System.out.println("Order Placed Successfully");
+				System.out.println("Total bill amount-> " + sum);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 

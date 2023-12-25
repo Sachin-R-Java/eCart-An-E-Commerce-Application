@@ -3,6 +3,7 @@ package com.eCart.test;
 import java.util.Scanner;
 
 import com.eCart.utility.Admin;
+import com.eCart.utility.DatabaseConnector;
 import com.eCart.utility.Guest;
 import com.eCart.utility.User;
 
@@ -40,25 +41,25 @@ public class Test {
 			case 1:
 				User u = new User();
 				u.userChoices();
-				//isContinue();
+				// isContinue();
 				break;
 			case 2:
 				Admin a = new Admin();
 				a.AdminChoice();
 				a.AdminActions();
-				//isContinue();
+				// isContinue();
 				break;
 			case 3:
 				Guest g = new Guest();
 				g.GuestChoice();
-				//isContinue();
+				// isContinue();
 				break;
 			case 4:
 				System.out.println("Thank You for using the application.");
-				//scan.reset();
-				//main(null);
+				// scan.reset();
+				// main(null);
 				break;
-				
+
 			default:
 				System.out.println("enter correct choice");
 				// HomePage();
@@ -66,7 +67,7 @@ public class Test {
 		} catch (Exception e) {
 			System.out.println("Please enter correct choice");
 			HomePage();
-			//main(null);
+			// main(null);
 		}
 	}
 }

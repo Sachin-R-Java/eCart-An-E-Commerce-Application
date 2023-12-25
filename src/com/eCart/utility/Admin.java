@@ -1,6 +1,6 @@
 package com.eCart.utility;
 
-import java.util.Scanner; 
+import java.util.Scanner;
 
 import com.eCart.adminfunctions.CheckQuantity;
 import com.eCart.adminfunctions.CheckUserDetails;
@@ -13,13 +13,13 @@ public class Admin {
 
 	public static void AdminChoice() {
 		// boolean status=false;
-			Scanner scan = new Scanner(System.in);
-			System.out.println("Admin username-> Admin");
-			System.out.println("Enter admin password->");
-			String password = scan.next();
-			if (password.equalsIgnoreCase("admin")) {
-				AdminLoginStatus = true;
-		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Admin username-> Admin");
+		System.out.println("Enter admin password->");
+		String password = scan.next();
+		if (password.equalsIgnoreCase("admin")) {
+			AdminLoginStatus = true;
+
 		}
 	}
 
@@ -33,73 +33,74 @@ public class Admin {
 			System.out.println("------------------------------------------------------");
 			System.out.println("Enter your choice->");
 			try {
-			int AdminChoiceSelection = scan.nextInt();
-			switch (AdminChoiceSelection) {
+				int AdminChoiceSelection = scan.nextInt();
+				switch (AdminChoiceSelection) {
 
-			case 1:
-				System.out.println("How many products you want to add in product list->");
-				int i = scan.nextInt();
-				
-				for (int j = 0; j < i; j++) {
-					Services s = new Services();
-					s.AddProducts();
+				case 1:
+					System.out.println("How many products you want to add in product list->");
+					int i = scan.nextInt();
+
+					for (int j = 0; j < i; j++) {
+						Services s = new Services();
+						s.AddProducts();
+					}
+					AdminActions();
+					isContinueAdmin();
+					break;
+				case 2:
+					CheckQuantity quantity = new CheckQuantity();
+					quantity.ProductQuantity();
+					AdminActions();
+					isContinueAdmin();
+					break;
+				case 3:
+					CheckUserDetails user = new CheckUserDetails();
+					user.GetUserDetails();
+					AdminActions();
+					isContinueAdmin();
+					break;
+				case 4:
+					CheckUserHistory history = new CheckUserHistory();
+					history.GetUserHistory();
+					AdminActions();
+					isContinueAdmin();
+					break;
+				case 5:
+					UpdateProductQuantity update = new UpdateProductQuantity();
+					update.UpdateQuantity();
+					AdminActions();
+					isContinueAdmin();
+					break;
+				case 6:
+					AdminLoginStatus = false;
+					System.out.println("Thanks for using application");
+					System.out.println("------------------------------------------------------");
+					Test.HomePage();
+					break;
+				default:
+					System.out.println("Enter correct choice");
+					isContinueAdmin();
 				}
-				AdminActions();
-				isContinueAdmin();
-				break;
-			case 2:
-				CheckQuantity quantity = new CheckQuantity();
-				quantity.ProductQuantity();
-				AdminActions();
-				isContinueAdmin();
-				break;
-			case 3:
-				CheckUserDetails user = new CheckUserDetails();
-				user.GetUserDetails();
-				AdminActions();
-				isContinueAdmin();
-				break;
-			case 4:
-				CheckUserHistory history = new CheckUserHistory();
-				history.GetUserHistory();
-				AdminActions();
-				isContinueAdmin();
-				break;
-			case 5 :
-				UpdateProductQuantity update = new UpdateProductQuantity();
-				update.UpdateQuantity();
-				AdminActions();
-				isContinueAdmin();
-				break;
-			case 6:
-				AdminLoginStatus = false;
-				System.out.println("Thanks for using application");
-				System.out.println("------------------------------------------------------");
-				Test.HomePage();
-				break;
-			default:
+			} catch (Exception e) {
 				System.out.println("Enter correct choice");
-				isContinueAdmin();
+				AdminActions();
 			}
-		} catch (Exception e) {
-			System.out.println("Enter correct choice");
-			AdminActions();
-		}
 
 		} else {
 			System.out.println("Wrong password,Login failed");
 			AdminChoice();
 		}
 	}
-	public static void isContinueAdmin() { 
+
+	public static void isContinueAdmin() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Do you want to continue enter 'y/Y' for yes and 'n/N for no");
 		String choice = scan.next();
-		if(choice.charAt(0)=='y' || choice.charAt(0)=='Y') {
+		if (choice.charAt(0) == 'y' || choice.charAt(0) == 'Y') {
 			AdminActions();
-		}else if(choice.charAt(0)=='n' || choice.charAt(0)=='N') {
+		} else if (choice.charAt(0) == 'n' || choice.charAt(0) == 'N') {
 			System.out.println("Thank You");
-		}else {
+		} else {
 			System.out.println("Please enter correct choice");
 			isContinueAdmin();
 		}
