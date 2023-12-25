@@ -62,14 +62,14 @@ productName varchar(255)not null,unitPrice float, quantity int not null);
 
 SQL Commands used- select, insert,update
 
+For Tables -> I have added SQL Database dump in project file use it.
+
 If you are using this application then you need to make changes to code as follows->
 
 1) Change the DB URL, Username, Password -> package = com.eCart.utility, class = DatabaseConnector.java, method = DBConnection().
-   
-2) Create  database in you local DB, and create all tables mentioned above.
 
-3) Add mysql-connector-java jar in build path, version I used -> 8.0.28.
+2) Add mysql-connector-java jar in build path, version I used -> 8.0.28.
 
-4) for admin login use password = "admin".
+3) for admin login use password = "admin".
 
-5) To run application -> Package = com.eCart.test, Class = Test.java. 
+4) To run application -> Package = com.eCart.test, Class = Test.java. 
